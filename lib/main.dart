@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'cores/screens/loader.dart';
 import 'features/auth/pages/login.dart';
 import 'features/auth/pages/username.dart';
-import 'features/channel/my_channel/pages/screen.dart';
+import 'features/channel/my_channel/pages/settings.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -51,7 +51,7 @@ class MainApp extends ConsumerWidget {
                     ConnectionState.waiting) {
                   return const Loader();
                 } else {
-                  return const MyChannelScreen();
+                  return const MyChannelSettings();
                 }
               },
             );
