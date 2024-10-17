@@ -67,25 +67,29 @@ class HomePage extends ConsumerWidget {
 
                 //--------------------------------------------------------------------
 
-                ref.watch(currentUserProvider).when(
-                  error: (error, stackTrace) {
-                    return ErrorPage(error: error.toString());
-                  },
-                  loading: () {
-                    return const Loader();
-                  },
-                  data: (currentUser) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 15),
-                      child: CircleAvatar(
-                        radius: 15,
-                        backgroundColor: Colors.grey,
-                        backgroundImage:
-                            CachedNetworkImageProvider(currentUser.profilePic),
-                      ),
+                Consumer(
+                  builder: (context, ref, child) {
+                    return ref.watch(currentUserProvider).when(
+                      error: (error, stackTrace) {
+                        return ErrorPage(error: error.toString());
+                      },
+                      loading: () {
+                        return const Loader();
+                      },
+                      data: (currentUser) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 15),
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundColor: Colors.grey,
+                            backgroundImage: CachedNetworkImageProvider(
+                                currentUser.profilePic),
+                          ),
+                        );
+                      },
                     );
                   },
-                ),
+                )
               ],
             ),
           ],
