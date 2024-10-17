@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "youtube-clone-rj",
+          "appId": "1:335884292175:android:ca45745be2a88d804b1a3a",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "youtube-clone-rj",
+          "configurations": {
+            "android": "1:335884292175:android:ca45745be2a88d804b1a3a",
+            "ios": "1:335884292175:ios:cb924767e75e0b674b1a3a"
+          }
+        }
+      }
+    }
+  }
+}
