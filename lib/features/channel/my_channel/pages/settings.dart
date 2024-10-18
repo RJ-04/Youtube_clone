@@ -78,10 +78,11 @@ class _MyChannelSettingsState extends ConsumerState<MyChannelSettings> {
                             context: context,
                             builder: (context) {
                               return SettingsDialog(
-                                identifier: 'Your New Display Name',
+                                identifier: 'Display Name',
                                 onSave: (name) => ref
                                     .watch(editSettingsProvider)
                                     .editDisplayName(name),
+                                field: 'displayName',
                               );
                             },
                           );
@@ -99,10 +100,11 @@ class _MyChannelSettingsState extends ConsumerState<MyChannelSettings> {
                             context: context,
                             builder: (context) {
                               return SettingsDialog(
-                                identifier: 'Your New Username',
+                                identifier: 'Username',
                                 onSave: (username) => ref
                                     .watch(editSettingsProvider)
                                     .editUserName(username),
+                                field: 'username',
                               );
                             },
                           );
@@ -120,10 +122,11 @@ class _MyChannelSettingsState extends ConsumerState<MyChannelSettings> {
                             context: context,
                             builder: (context) {
                               return SettingsDialog(
-                                identifier: 'Your New Description',
+                                identifier: 'Description',
                                 onSave: (description) => ref
                                     .watch(editSettingsProvider)
                                     .editDescription(description),
+                                field: 'description',
                               );
                             },
                           );

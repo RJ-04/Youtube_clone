@@ -48,4 +48,18 @@ class UserDataService {
 
     return user;
   }
+
+  Future<bool> validateUserDataUniqueness(
+      String userDataElement, String field) async {
+    final usersMap = await FirebaseFirestore.instance.collection('users').get();
+
+    final usernameList =
+        usersMap.docs.map((users) => users.data()[field]).toList();
+
+    if (usernameList.any((element) => userDataElement == element)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

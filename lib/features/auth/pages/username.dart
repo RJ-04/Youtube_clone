@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,25 +26,6 @@ class _UsernamePageState extends ConsumerState<UsernamePage> {
   final TextEditingController _usernameController = TextEditingController();
   bool isValidate = true;
 
-  void validateUsername() async {
-    final usersMap = await FirebaseFirestore.instance.collection('users').get();
-
-    final usernameList =
-        usersMap.docs.map((users) => users.data()['username']).toList();
-
-    if (usernameList.any((element) => _usernameController.text == element)) {
-      setState(() {
-        isValidate = false;
-      });
-    } else {
-      setState(() {
-        isValidate = true;
-      });
-    }
-
-    return;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +47,13 @@ class _UsernamePageState extends ConsumerState<UsernamePage> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Form(
                 child: TextFormField(
-                  onChanged: (username) => validateUsername(),
+                  onChanged: (username) async {
+                    isValidate = await ref
+                        .watch(userDataServiceProvider)
+                        .validateUserDataUniqueness(username, 'username');
+
+                    setState(() {});
+                  },
                   key: _formKey,
                   controller: _usernameController,
                   autovalidateMode: AutovalidateMode.always,
