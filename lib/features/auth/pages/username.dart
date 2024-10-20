@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../cores/buttons/flat_button.dart';
+import '../../../cores/widgets/flat_button.dart';
 import '../services/user_data.dart';
 
 final _formKey = GlobalKey<FormState>();

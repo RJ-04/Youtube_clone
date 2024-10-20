@@ -4,11 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'cores/firebase_options.dart';
 import 'cores/screens/loader.dart';
+import 'features/auth/pages/home.dart';
 import 'features/auth/pages/login.dart';
 import 'features/auth/pages/username.dart';
-import 'features/channel/my_channel/pages/settings.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +51,7 @@ class MainApp extends ConsumerWidget {
                     ConnectionState.waiting) {
                   return const Loader();
                 } else {
-                  return const MyChannelSettings();
+                  return const HomePage();
                 }
               },
             );

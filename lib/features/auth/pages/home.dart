@@ -2,16 +2,26 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../cores/buttons/image_button.dart';
 import '../../../cores/screens/error_screen.dart';
 import '../../../cores/screens/loader.dart';
+import '../../../cores/widgets/image_button.dart';
+import '../../../pages_list.dart';
+import '../../content/bottom_nav_bar.dart';
+import '../../upload/upload_sheet.dart';
 import '../provider/user_provider.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffFFFFFF),
       body: SafeArea(
@@ -92,8 +102,25 @@ class HomePage extends ConsumerWidget {
                 )
               ],
             ),
+
+            //--------------------------------------------------------------------
+
+            Expanded(child: pages[_currentIndex]),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigation(
+        onPressed: (index) {
+          if (index != 2) {
+            _currentIndex = index;
+            setState(() {});
+          } else {
+            showBottomSheet(
+              context: context,
+              builder: (context) => const CreateBottomSheet(),
+            );
+          }
+        },
       ),
     );
   }

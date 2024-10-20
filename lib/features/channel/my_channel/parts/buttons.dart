@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../cores/buttons/image_button.dart';
 import '../../../../cores/colors.dart';
+import '../../../../cores/widgets/image_button.dart';
 
 class MyChannelButtons extends StatelessWidget {
   const MyChannelButtons({super.key});

@@ -23,7 +23,7 @@ final _formKey = GlobalKey<FormState>();
 
 class _SettingsDialogState extends ConsumerState<SettingsDialog> {
   final controller = TextEditingController();
-  bool isValidate = true;
+  bool isValidate = false;
 
   @override
   Widget build(BuildContext context) {
