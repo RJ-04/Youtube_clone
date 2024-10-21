@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../cores/methods.dart';
 import '../../cores/widgets/image_item.dart';
 
 class CreateBottomSheet extends StatelessWidget {
@@ -44,7 +45,9 @@ class CreateBottomSheet extends StatelessWidget {
                 height: 40,
                 child: ImageItem(
                   itemText: 'Upload a Video',
-                  itemClicked: () {},
+                  itemClicked: () async {
+                    await pickVideo();
+                  },
                   imageName: 'upload.png',
                   haveColor: true,
                 ),

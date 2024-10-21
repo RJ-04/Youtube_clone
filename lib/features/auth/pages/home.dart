@@ -110,12 +110,14 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigation(
-        onPressed: (index) {
+        onPressed: (index) async {
           if (index != 2) {
             _currentIndex = index;
             setState(() {});
           } else {
-            showBottomSheet(
+            showModalBottomSheet(
+              sheetAnimationStyle:
+                  AnimationStyle(duration: const Duration(milliseconds: 500)),
               context: context,
               builder: (context) => const CreateBottomSheet(),
             );
