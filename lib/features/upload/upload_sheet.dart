@@ -46,7 +46,7 @@ class CreateBottomSheet extends StatelessWidget {
                 child: ImageItem(
                   itemText: 'Upload a Video',
                   itemClicked: () async {
-                    await pickVideo();
+                    await pickVideo(context);
                   },
                   imageName: 'upload.png',
                   haveColor: true,

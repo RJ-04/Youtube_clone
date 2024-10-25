@@ -2,14 +2,16 @@ class VideoModel {
   final String videoUrl;
   final String thumbnail;
   final String title;
-  final String datePublished;
-  final String views;
+  final DateTime datePublished;
+  final String description;
+  final int views;
   final String videoId;
   final String userId;
   final List likes;
   final String type;
 
   VideoModel({
+    required this.description,
     required this.videoUrl,
     required this.thumbnail,
     required this.title,
@@ -25,6 +27,7 @@ class VideoModel {
     return <String, dynamic>{
       'videoUrl': videoUrl,
       'thumbnail': thumbnail,
+      'description': description,
       'title': title,
       'datePublished': datePublished,
       'views': views,
@@ -46,6 +49,7 @@ class VideoModel {
       userId: map['userId'],
       likes: List.from(map['likes']),
       type: map['type'],
+      description: map['description'],
     );
   }
 }

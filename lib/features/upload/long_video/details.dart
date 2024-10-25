@@ -1,23 +1,28 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../cores/methods.dart';
+import 'repository.dart';
 
-class VideoDetails extends StatefulWidget {
-  const VideoDetails({super.key});
+class VideoDetails extends ConsumerStatefulWidget {
+  final File video;
+  const VideoDetails({required this.video, super.key});
 
   @override
-  State<VideoDetails> createState() => _VideoDetailsState();
+  ConsumerState<VideoDetails> createState() => _VideoDetailsState();
 }
 
-class _VideoDetailsState extends State<VideoDetails> {
+class _VideoDetailsState extends ConsumerState<VideoDetails> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
-  bool isThumbNailSelected = false;
 
+  bool isThumbNailSelected = false;
   File? image;
+  final String uuid = const Uuid().v4();
 
   bool publishConditionsSatisfied() {
     return isThumbNailSelected &&
@@ -138,10 +143,31 @@ class _VideoDetailsState extends State<VideoDetails> {
                             const BorderRadius.all(Radius.circular(10)),
                       ),
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (publishConditionsSatisfied()) {
-                            String thumbnail = putFileInStorage(
-                                image, const Uuid().v4(), 'image');
+                            final navigator = Navigator.of(context);
+
+                            String thumbnail =
+                                await putFileInStorage(image, uuid, 'image');
+
+                            String videoUrl = await putFileInStorage(
+                              widget.video,
+                              uuid,
+                              'video',
+                            );
+
+                            ref.watch(longVideoProvider).uploadVideoToFirestore(
+                                  videoUrl: videoUrl,
+                                  thumbnail: thumbnail,
+                                  title: titleController.text,
+                                  videoId: uuid,
+                                  datePublished: DateTime.now(),
+                                  userId:
+                                      FirebaseAuth.instance.currentUser!.uid,
+                                  description: descriptionController.text,
+                                );
+
+                            navigator.pop();
                           }
                         },
                         child: const Text(
