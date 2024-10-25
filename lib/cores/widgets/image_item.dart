@@ -19,7 +19,7 @@ class ImageItem extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        splashColor: Colors.amber,
+        splashColor: Colors.grey,
         borderRadius: BorderRadius.circular(25),
         onTap: itemClicked,
         child: Padding(

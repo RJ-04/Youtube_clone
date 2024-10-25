@@ -6,6 +6,7 @@ import '../../../cores/screens/error_screen.dart';
 import '../../../cores/screens/loader.dart';
 import '../../../cores/widgets/image_button.dart';
 import '../../../pages_list.dart';
+import '../../account/account.dart';
 import '../../content/bottom_nav_bar.dart';
 import '../../upload/upload_sheet.dart';
 import '../provider/user_provider.dart';
@@ -89,11 +90,21 @@ class _HomePageState extends State<HomePage> {
                       data: (currentUser) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 15),
-                          child: CircleAvatar(
-                            radius: 15,
-                            backgroundColor: Colors.grey,
-                            backgroundImage: CachedNetworkImageProvider(
-                                currentUser.profilePic),
+                          child: GestureDetector(
+                            onTap: () async => await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    AccountPage(user: currentUser),
+                              ),
+                            ),
+                            child: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.grey,
+                              backgroundImage: CachedNetworkImageProvider(
+                                currentUser.profilePic,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -109,6 +120,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+
+      //--------------------------------------------------------------------
+
       bottomNavigationBar: BottomNavigation(
         onPressed: (index) async {
           if (index != 2) {
